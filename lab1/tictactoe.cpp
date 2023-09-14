@@ -1,5 +1,4 @@
 #include "tictactoe.h"
-#include<algorithm>
 tictactoe::tictactoe(int size)
 {
 	set_size(size);
