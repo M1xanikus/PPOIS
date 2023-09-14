@@ -1,159 +1,153 @@
 #include "tictactoe.h"
 #include<algorithm>
-tictactoe::tictactoe(int size)
+Tictactoe::Tictactoe(int size)
 {
 	set_size(size);
 	this->X_or_0 = true;
 	std::vector<char> line(size,'_');
 	for (int i = 0; i < size; i++)
-		arr.push_back(line);
+		field.push_back(line);
 	std::cout <<"Field was created" << std::endl;
 }
-tictactoe::tictactoe() : tictactoe(3) {};
 
-int tictactoe::get_size()
+Tictactoe::Tictactoe() : Tictactoe(3){}
+
+
+int Tictactoe::get_size()
 {
-	return size;
+	return field_size;
 }
 
-void tictactoe::set_size(int size)
+void Tictactoe::set_size(int size)
 {
-	this->size = size;
+	this->field_size = size;
 }
 
-void tictactoe::print()
+void Tictactoe::print()
 {
-	for (int i = 0; i < arr.size(); i++)
+	for (int i = 0; i < field.size(); i++)
 	{
-		for (int j = 0; j < arr.size(); j++)
+		for (int j = 0; j < field.size(); j++)
 		{
-			std::cout << arr[i][j]<<" ";
+			std::cout << field[i][j]<<" ";
 		}
 		std::cout << std::endl;
 	}
 }
 
-void tictactoe::choosing_place(int line_, int column)
+void Tictactoe::choosing_place(int line_, int column)
 {	
-	count++;
-	if (X_or_0 == true)		std::cout << "			X TURN" << std::endl;
+	turn_count++;
+	if (X_or_0)		std::cout << "			X TURN" << std::endl;
 	else					std::cout << "			0 TURN" << std::endl;
-	this->column = column;
-		if (!(column <= size - 1 && column >= 0))
+		if (!(column <= field_size - 1 && column >= 0))
 		{
 			std::cout <<" Your column"<< column <<" that you chose doesn't exist\n" << std::endl;
 			return;
 				
 		}
-	this->line_ = line_;
-		if (!(line_ <= size - 1 && line_ >= 0))
+		if (!(line_ <= field_size - 1 && line_ >= 0))
 		{
 			std::cout << " Your line "<< line_ <<"that you chose doesn't exist\n" << std::endl;
 			return;
 		}
-	if (arr[line_][column] != 'X' && arr[line_][column] != '0')
+	if (field[line_][column] != 'X' && field[line_][column] != '0')
 	{
-		X_or_0f(); 
+		if (X_or_0)  field[line_][column] = 'X';
+		else field[line_][column] = '0';
+		switch_X_or_0();
 		return;
 	}
-		else std::cout << "Try again\nCell "<<this->line_ <<" "<< this->column << " you choosed is already taken" << std::endl;
+		else std::cout << "Try again\nCell "<<line_ <<" "<< column << " you choosed is already taken" << std::endl;
 }
-char tictactoe::get_place(int line_,int column)
+char Tictactoe::get_place(int line_,int column)
 {
-	return arr[line_][column];
+	return field[line_][column];
 }
-void tictactoe::X_or_0f()
+void Tictactoe::switch_X_or_0()
 {
-	if (X_or_0 == true)
-	{
-		arr[line_][column] = 'X';
-		this->X_or_0 = false;
-	}
-	else
-	{
-		arr[line_][column] = '0';
-		this->X_or_0 = true;
-	}
+	if (X_or_0) this->X_or_0 = false;
+	else this->X_or_0 = true;
 }
-bool tictactoe::gorizontal_check()
+bool Tictactoe::gorizontal_check()
 {
-	for (int i = 0; i < size ; i++)
+	for (int i = 0; i < field_size ; i++)
 	{
-		for (int j = 0; j < size - 1; j++)
+		for (int j = 0; j < field_size - 1; j++)
 		{
 
-			if (arr[i][j] == '_' || arr[i][j + 1] == '_')
+			if (field[i][j] == '_' || field[i][j + 1] == '_')
 				break;
-			if (arr[i][j] != arr[i][j + 1])
+			if (field[i][j] != field[i][j + 1])
 				break;
-			if (arr[i][j] == arr[i][j + 1] && j + 1 == size - 1)
+			if (field[i][j] == field[i][j + 1] && j + 1 == field_size - 1)
 			{
-				std::cout <<"		" << arr[i][j] << " WON" << std::endl;
+				std::cout <<"		" << field[i][j] << " WON" << std::endl;
 				return true;
 			}
 		}
 	}
 	return false;
 }
-bool tictactoe::frontal_check()
+bool Tictactoe::frontal_check()
 {
-	for (int i = 0; i < size ; i++)
+	for (int i = 0; i < field_size ; i++)
 	{
-		for (int j = 0; j < size - 1; j++)
+		for (int j = 0; j < field_size - 1; j++)
 		{
-			if (arr[j][i] == '_' || arr[j + 1][i] == '_')
+			if (field[j][i] == '_' || field[j + 1][i] == '_')
 				break;
-			if (arr[j][i] != arr[j + 1][i])
+			if (field[j][i] != field[j + 1][i])
 				break;
-			if (arr[j][i] == arr[j + 1][i] && j + 1 == size - 1)
+			if (field[j][i] == field[j + 1][i] && j + 1 == field_size - 1)
 			{
-				std::cout << "		" << arr[j][i] << " WON" << std::endl;
+				std::cout << "		" << field[j][i] << " WON" << std::endl;
 				return true;
 			}
 		}
 	}
 	return false;
 }
-bool tictactoe::diagonal_check()
+bool Tictactoe::diagonal_check()
 {
-	for (int i = 0; i < size - 1; i++)
+	for (int i = 0; i < field_size - 1; i++)
 	{
-		if (arr[i][i] == '_' || arr[i + 1][i + 1] == '_')
+		if (field[i][i] == '_' || field[i + 1][i + 1] == '_')
 			return false;
-		if (arr[i][i] != arr[i + 1][i + 1])
+		if (field[i][i] != field[i + 1][i + 1])
 			return false;
-		if (arr[i][i] == arr[i + 1][i + 1] && i + 1 == size - 1)
+		if (field[i][i] == field[i + 1][i + 1] && i + 1 == field_size - 1)
 		{
-			std::cout << "		" << arr[i][i] << " WON" << std::endl;
+			std::cout << "		" << field[i][i] << " WON" << std::endl;
 			return true;
 		}
 	}
 	return false;
 }
-bool tictactoe::alt_diagonal_check()
+bool Tictactoe::alt_diagonal_check()
 {
-	for (int j = size-1, i = 0; j > 0, i< size-1; j--,i++)
+	for (int j = field_size -1, i = 0; j > 0, i< field_size -1; j--,i++)
 	{
-			if (arr[i][i] == '_' || arr[i + 1][j - 1] == '_')
+			if (field[i][i] == '_' || field[i + 1][j - 1] == '_')
 				return false;
-			if (arr[i][j] != arr[i + 1][j - 1])
+			if (field[i][j] != field[i + 1][j - 1])
 				return false;
-			if (arr[i][j] == arr[i + 1][j - 1] && i + 1 == size - 1)
+			if (field[i][j] == field[i + 1][j - 1] && i + 1 == field_size - 1)
 			{
-				std::cout << "		" << arr[i][i] << " WON" << std::endl;
+				std::cout << "		" << field[i][i] << " WON" << std::endl;
 
 				return true;
 			}
 	}
 	return false;
 }
-bool tictactoe::win_check()
+bool Tictactoe::win_check()
 {		
 	if (gorizontal_check()) return true;
 	if (frontal_check()) return true;
 	if (diagonal_check()) return true;
 	if (alt_diagonal_check()) return true;
-	if (count == size * size)
+	if (turn_count == field_size * field_size)
 	{
 		std::cout << "		" << " DRAW" << std::endl;
 		return true;

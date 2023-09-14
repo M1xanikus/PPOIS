@@ -2,24 +2,22 @@
 #include<algorithm>
 #include<iostream>
 #include<vector>
-class tictactoe
+class Tictactoe
 {
 private:
-	int size;
-	std::vector<std::vector<char>> arr;
-	int column;
-	int line_;
+	int field_size;
+	std::vector<std::vector<char>> field;
 	bool X_or_0;
-	int count = 0;
+	int turn_count = 0;
 	bool gorizontal_check();
 	bool frontal_check();
 	bool diagonal_check();
 	bool alt_diagonal_check();
-	void X_or_0f();
+	void switch_X_or_0();
 public:
 	void print();
-	tictactoe(int size);
-	tictactoe();
+	Tictactoe(int size);
+	Tictactoe();
 	int get_size();
 	void set_size(int size);
 	void choosing_place(int line_, int column);

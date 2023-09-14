@@ -4,7 +4,7 @@
 using namespace std;
 void main()
 {
-	tictactoe test;
+	Tictactoe test;
 	test.choosing_place(1, 1);//x
 	test.choosing_place(2, 0);//0
 	test.choosing_place(0, 1);//x

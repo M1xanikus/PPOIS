@@ -11,24 +11,24 @@ namespace UnitTest1
 		
 		TEST_METHOD(TestDefaultConstruct)
 		{
-			tictactoe test;
+			Tictactoe test;
 			Assert::IsTrue(test.get_size() == 3);
 		}
 		TEST_METHOD(TestConstruct)
 		{
-			tictactoe test(4);
+			Tictactoe test(4);
 			Assert::IsTrue(test.get_size() == 4);
 		}
 		TEST_METHOD(TestPlacingX)
 		{
-			tictactoe test;
+			Tictactoe test;
 			test.choosing_place(0, 0);
 			Assert::IsTrue(test.get_place(0, 0) == 'X');
 
 		}
 		TEST_METHOD(WinnigTestGorisontal)
 		{
-			tictactoe test;
+			Tictactoe test;
 			test.choosing_place(0, 0);//x
 			test.choosing_place(1, 1);//0
 			test.choosing_place(0, 1);//x
@@ -38,7 +38,7 @@ namespace UnitTest1
 		}
 		TEST_METHOD(WinnigTestFrontal)
 		{
-			tictactoe test;
+			Tictactoe test;
 			test.choosing_place(0, 0);//x
 			test.choosing_place(1, 1);//0
 			test.choosing_place(1, 0);//x
@@ -48,7 +48,7 @@ namespace UnitTest1
 		}
 		TEST_METHOD(WinnigTestDiagonal)
 		{
-			tictactoe test;
+			Tictactoe test;
 			test.choosing_place(0, 0);//x
 			test.choosing_place(1, 0);//0
 			test.choosing_place(1, 1);//x
@@ -58,7 +58,7 @@ namespace UnitTest1
 		}
 		TEST_METHOD(WinningTestAltDiagonal)
 		{
-			tictactoe test;
+			Tictactoe test;
 			test.choosing_place(0, 2);//x
 			test.choosing_place(1, 0);//0
 			test.choosing_place(1, 1);//x
@@ -68,7 +68,7 @@ namespace UnitTest1
 		}
 		TEST_METHOD(DrawTest)
 		{
-			tictactoe test;
+			Tictactoe test;
 			test.choosing_place(1, 1);//x
 			test.choosing_place(2, 0);//0
 			test.choosing_place(0, 1);//x
