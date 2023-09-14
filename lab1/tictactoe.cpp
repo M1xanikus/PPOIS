@@ -66,8 +66,8 @@ char Tictactoe::get_place(int line_,int column)
 }
 void Tictactoe::switch_X_or_0()
 {
-	if (X_or_0) this->X_or_0 = false;
-	else this->X_or_0 = true;
+	if (X_or_0) this->X_or_0 = !X_or_0;
+	else this->X_or_0 = !X_or_0;
 }
 bool Tictactoe::gorizontal_check()
 {
