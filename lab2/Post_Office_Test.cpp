@@ -17,9 +17,9 @@ namespace PostOfficeTest
 			Post_Office Test1("Lida");
 			Post_Office Test2;
 			Test2.Set_address("NeLida");
-			Assert::IsTrue(Test2.Get_adress() == "NeLida");
+			Assert::AreEqual("NeLida", est2.Get_adress());
 			Test2.Set_mail(mail);
-			Assert::IsTrue(Test2.Get_mail() == mail);
+			Assert::AreEqual(mail,Test2.Get_mail());
 		}
 		TEST_METHOD(Test_Person_and_Client)
 		{
@@ -31,12 +31,12 @@ namespace PostOfficeTest
 			one->Set_postcode("231300");
 			one->Set_address("Lida city,Krupskoi St.");
 			one->Set_cash(100);
-			Assert::IsTrue(client1.Get_name() == one->Get_name());
-			Assert::IsTrue(client1.Get_surname() == one->Get_surname());
-			Assert::IsTrue(client1.Get_patronymic() == one->Get_patronymic());
-			Assert::IsTrue(client1.Get_postcode() == one->Get_postcode());
-			Assert::IsTrue(client1.Get_address() == one->Get_address());
-			Assert::IsTrue(client1.Get_cash() == one->Get_cash());
+			Assert::AreEqual(one->Get_name(),client1.Get_name());
+			Assert::AreEqual(one->Get_surname(),client1.Get_surname());
+			Assert::AreEqual(one->Get_patronymic(),client1.Get_patronymic());
+			Assert::AreEqual(one->Get_postcode(),client1.Get_postcode());
+			Assert::AreEqual(one->Get_address(),client1.Get_address());
+			Assert::AreEqual(one->Get_cash(),client1.Get_cash());
 			Mail* mail;
 			Letter letter;
 			mail = &letter;
@@ -51,9 +51,9 @@ namespace PostOfficeTest
 			mail[1] = &parcel;
 			parcel.Set_Weight(500);
 			mail[1]->Set_cost_per_km(1);
-			Assert::IsTrue(mail[1]->Get_cost_per_km() == 25);
+			Assert::AreEqual(25,mail[1]->Get_cost_per_km() );
 			mail[0]->Set_cost_per_km(10);
-			Assert::IsTrue(mail[0]->Get_cost_per_km() == 10);
+			Assert::AreEqual(10,mail[0]->Get_cost_per_km());
 			mail[0]->Set_addressee_name("Nikita");
 			mail[0]->Set_addresser_name("Mikhail");
 			mail[0]->Set_addressee_surname("Narkevich");
@@ -85,17 +85,17 @@ namespace PostOfficeTest
 			Persons[1] = &cashier;
 			Distance_between_post_office evaluate(From, To);
 			cashier.Evaluate_mail_cost(evaluate, *mail);
-			Assert::IsTrue(cashier.Get_mail_cost(*mail) == mail->Get_cost());
+			Assert::AreEqual(mail->Get_cost(),cashier.Get_mail_cost(*mail));
 			client1.Pay(*mail,From);
 			From.Set_mail(mail);
-			Assert::IsTrue(From.Get_mail() == mail);
+			Assert::AreEqual(mail,From.Get_mail() );
 			Deliverer deliverer;
 			Persons[2] = &deliverer;
 			deliverer.Deliver(From, To);
-			Assert::IsTrue(To.Get_mail() == mail);
+			Assert::AreEqual(mail,To.Get_mail());
 			deliverer.Set_cash(100);
 			deliverer.Set_salary(400);
-			Assert::IsTrue(deliverer.Get_cash() + deliverer.Getter_salary() == 500);
+			Assert::AreEqual(500,deliverer.Get_cash() + deliverer.Getter_salary());
 			
 			
 		}
