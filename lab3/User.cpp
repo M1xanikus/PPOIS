@@ -99,6 +99,7 @@ Group* User::Create_Group(Social_Network& network,User* user)
 		network.Add_Group(newGroup);
 		return newGroup;
 	}
+	return nullptr;
 }
 
 void User::Delete_User_From_Group(User* admin, User* user, Group* group)
@@ -141,6 +142,7 @@ Chat* User::Create_Chat(Social_Network& network, User* userone,User* usertwo)
 		usertwo->chats_.push_back(newChat);
 		return newChat;
 	}
+	return nullptr;
 }
 
 void User::Write_Message(Chat* chat, User* to_user, std::string message)

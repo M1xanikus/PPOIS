@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-
+#include"Union_headers.h"
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace SocialNetwork
@@ -11,7 +11,7 @@ namespace SocialNetwork
 		
 		TEST_METHOD(TestMethod1)
 		{
-			Assert::IsTrue(1 == 1);
+			
 		}
 	};
 }
