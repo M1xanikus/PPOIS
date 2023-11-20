@@ -83,9 +83,9 @@ Social_Network::~Social_Network()
     for (int i = 0; i < groups_.size(); i++) { delete groups_[i]; }
     for (int i = 0; i < chats_.size(); i++) { delete chats_[i]; }
 }
-User* Social_Network::RegisterUser(std::string username, std::string password,Social_Network example)
+User* Social_Network::RegisterUser(std::string username, std::string password)
 {
-    if (!example.CheckPassword(password)) {
+    if (!CheckPassword(password)) {
         std::cout << "Password is not strong enough!" << std::endl;
         return nullptr;
     }

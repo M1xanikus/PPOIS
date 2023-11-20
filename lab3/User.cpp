@@ -11,13 +11,14 @@ std::string User::Get_Username()
 	return username_;
 }
 
-void User::Write_Post(Post* post, std::string text,User* user)
+Post* User::Write_Post(std::string text,User* user)
 {
 	if (authorized_)
 	{
+		Post* post = new Post();
 		post->Set_Text(text);
 		post->Set_Author(user);
-		return;
+		return post;
 	}
 	std::cout << "Sign in before writing post!" << std::endl;
 }
@@ -35,7 +36,13 @@ void User::Add_Friend(User* userone,User* usertwo) //add alert
 	if (authorized_ && Is_Not_Blocked(usertwo) && usertwo->Is_Not_Blocked(userone))
 	{
 		friends_.push_back(usertwo);
-		Notification* extract = new Notification(usertwo, "You have some friends to ADD!");
+		if (usertwo->Is_Friend(userone))
+		{
+			Notification extract(usertwo, "You have a new friend!");
+			usertwo->Set_Notification(extract);
+			return;
+		}
+		Notification extract(usertwo, "You have some friends to ADD!");
 		usertwo->Set_Notification(extract);
 	}
 	
@@ -50,7 +57,7 @@ void User::Delete_Friend(User* user)
 			if (user == friends_[i])
 			{
 				friends_.erase(friends_.begin() + i);
-				Notification* extract = new Notification(user, "You are not friend anymore!");
+				Notification extract(user, "You are not friend anymore!");
 				user->Set_Notification(extract);
 				return;
 			}
@@ -69,7 +76,7 @@ void User::Block_User(User* user)
 	
 }
 
-void User::Delete_Blocked_User(User* user)
+void User::Unblock_User(User* user)
 {
 	if (authorized_)
 	{
@@ -126,6 +133,7 @@ void User::Delete_Group(User* admin,Group* group, Social_Network& network)
 		if (admin == group->Get_Administrator()&& authorized_)
 		{
 			network.Delete_Group(group);
+			delete group;
 		}
 		std::cout << "You are not Administrator or are not authorized" << std::endl;
 }
@@ -164,9 +172,8 @@ void User::Extract_Notification()
 {
 	if (authorized_)
 	{
-		notifications_.at(notifications_.size() - 1)->View_Notification();
-		delete notifications_.at(notifications_.size() - 1);
-		notifications_.erase(notifications_.end());
+		notifications_[notifications_.size()-1].View_Notification();
+		notifications_.erase(notifications_.end() - 1);
 	}
 }
 
@@ -175,19 +182,29 @@ void User::Set_Profile(Profile* profile)
 	user_profile_ = profile;
 }
 
+Profile* User::Get_Profile()
+{
+	return user_profile_;
+}
+
 void User::Fill_Profile(std::string name, std::string surname, std::string date_of_birth, std::string about_me)
 {
-	user_profile_->Set_Name(name);
-	user_profile_->Set_Surname(surname);
-	user_profile_->Set_Date_Of_Birth(date_of_birth);
-	user_profile_->Set_About_Me(about_me);
+	if (authorized_)
+	{
+		user_profile_->Set_Name(name);
+		user_profile_->Set_Surname(surname);
+		user_profile_->Set_Date_Of_Birth(date_of_birth);
+		user_profile_->Set_About_Me(about_me);
+	}
 }
 
 void User::Create_Story(std::string info)
 {
-	
-	Story* example = new Story(info);
-	delete example;
+	if (authorized_)
+	{
+		Story* example = new Story(info);
+		delete example;
+	}
 }
 
 User::~User()
@@ -196,7 +213,7 @@ User::~User()
 }
 
 
-void User::Set_Notification(Notification* notify)
+void User::Set_Notification(Notification notify)
 {
 	notifications_.push_back(notify);
 }

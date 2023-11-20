@@ -13,7 +13,7 @@ private:
 	std::vector<Post*> posts_;
 	std::vector<Chat*> chats_;
 public:
-	User* RegisterUser(std::string username, std::string password,Social_Network example);
+	User* RegisterUser(std::string username, std::string password);
 	bool CheckPassword(std::string password);
 	User* Login(std::string username, std::string password);
 	User* Logout(User*);
