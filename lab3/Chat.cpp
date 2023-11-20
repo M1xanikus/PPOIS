@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Chat.h"
-
+#include"User.h"
 void Chat::Add_Chatters(User* person)
 {
 	chatters_.push_back(person);

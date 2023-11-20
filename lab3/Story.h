@@ -1,7 +1,8 @@
 #pragma once
 #include<thread>
 #include<chrono>
-#include"User.h";
+#include<string>
+class User;
 class Story
 {
 public:

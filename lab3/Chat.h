@@ -1,6 +1,8 @@
 #pragma once
-#include"User.h"
 #include<utility>
+#include<vector>
+#include<string>
+class User;
 class Chat
 {
 public:

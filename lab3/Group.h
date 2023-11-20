@@ -1,5 +1,7 @@
 #pragma once
-#include"User.h"
+#include<vector>
+#include"Post.h"
+class User;
 class Group
 {
 public:

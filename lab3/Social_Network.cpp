@@ -1,5 +1,6 @@
 #include "pch.h"
 #include"Social_Network.h"
+#include"User.h"
 
 
 bool Social_Network::CheckPassword(std::string password){
@@ -31,6 +32,7 @@ User* Social_Network:: Login(std::string username, std::string password)
 User* Social_Network::Logout(User* user)
 {
     user->Authorize(false);
+    return nullptr;
 }
 void Social_Network::Add_Group(Group* group)
 {

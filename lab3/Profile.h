@@ -1,5 +1,6 @@
 #pragma once
-#include"User.h"
+#include<string>
+class User;
 class Profile
 {
 public:

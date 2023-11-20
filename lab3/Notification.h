@@ -1,5 +1,6 @@
 #pragma once
-#include"User.h"
+#include<string>
+class User;
 class Notification {
 public:
 	Notification(User* user, std::string text) : notification_text_(text), user_(user)

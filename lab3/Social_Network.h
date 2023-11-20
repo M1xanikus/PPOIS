@@ -1,10 +1,10 @@
 #pragma once
 #include<iostream>
 #include"Profile.h"
-#include"User.h"
 #include"Post.h"
 #include"Group.h"
 #include"Chat.h"
+class User;
 class Social_Network
 {
 private:

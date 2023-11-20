@@ -3,11 +3,11 @@
 #include<string>
 #include<iostream>
 #include"Notification.h"
-#include"Post.h"
-#include"Social_Network.h"
+#include "Post.h"
+#include "Social_Network.h"
 #include"Group.h"
-#include"Chat.h"
-#include"Story.h"
+#include "Chat.h"
+#include "Story.h"
 class User{
 public:
     User(std::string username, std::string password): username_(username),password_(password) {}

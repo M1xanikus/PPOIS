@@ -1,7 +1,7 @@
 #pragma once
-#include"User.h"
 #include<string>
 #include<vector>
+class User;
 class Post
 {public:
 	void Set_Text(std::string text);
