@@ -1,8 +1,11 @@
 #pragma once
 #include"Moderator.h"
+class Social_Network;
 class Admin : public Moderator
 {
+	Social_Network social_network_;
 public:
-	void Delete_User(User*,Social_Network&);
+	void Set_Social_Network(Social_Network);
+	void Delete_User(User*);
 };
 
