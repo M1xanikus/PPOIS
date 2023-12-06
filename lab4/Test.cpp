@@ -5,7 +5,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace PPOISLAB4
 {
-	TEST_CLASS(PPOISLAB4)
+	TEST_CLASS(Test)
 	{
 	public:
 		
