@@ -26,33 +26,11 @@ public:
 	void Clear_Graph();
 	MatrixIterator Vertex_List_Begin(int ind)
 	{
-		try
-		{
-			if (ind < 0 || ind >= matrix_size_)
-				throw "Vertex doesn't exist!";
-
-				catch (const char* message)
-			{
-				std::cout << message;
-				return;
-			}
-		}
+	
 		return matrix_[ind].begin();
 	}
 	MatrixIterator Vertex_List_End(int ind)
 	{
-		try
-		{
-			if (ind < 0 || ind >= matrix_size_)
-				throw "Vertex doesn't exist!";
-
-			
-		}
-		catch (const char* message)
-		{
-			std::cout << message;
-			return;
-		}
 		return matrix_[ind].end();
 	}
 	~Graph();
@@ -93,18 +71,7 @@ inline void Graph<T>::Add_Vertex(value_type info)
 template<typename T>
 inline void Graph<T>::Add_Edge(int i, int j)
 {
-	try
-	{
-		
-		if (i < 0 || j < 0 || i >= matrix_.size() || j >= matrix_.size())
-			throw "Vertex doesn't exist!";
-		if (matrix_[i][j] == 1 && matrix_[j][i] == 1)
-			throw "This edge is already exist!";
-	}
-	catch (const char* message) {
-		std::cout << message;
-		return;
-	}
+	
 	matrix_[i][j] = 1;
 	matrix_[j][i] = 1;
 
@@ -124,15 +91,6 @@ inline bool Graph<T>::Is_Vertex_In_Graph(value_type info)
 template<typename T>
 inline bool Graph<T>::Is_Edge_Between(int i, int j)
 {
-	try {
-		if ( i < 0 || j < 0 || i >= matrix_.size() || j >= matrix_.size())
-			throw "This vertex doesn't exist!";
-	}
-	catch (const char* message)
-	{
-		std::cout << message;
-		return -1;
-	}
 	if (matrix_[i][j] == 1 && matrix_[j][i] == 1)
 		return true;
 	else false;
@@ -142,18 +100,6 @@ template<typename T>
 inline int Graph<T>::Vertex_Degree(int ind)
 {
 	int count = 0;
-	try
-	{
-		if (ind < 0 || ind >= matrix_.size())
-			throw "Vertex doesn't exist!";
-		
-		
-	}
-	catch (const char* message)
-	{
-		std::cout << message;
-		return -1;
-	}
 	for (int j = 0;  j < matrix_.size(); j++)
 	{
 		if (matrix_[ind][j] == 1)
@@ -184,17 +130,7 @@ inline int Graph<T>::Get_Amount_Of_Edges()
 template<typename T>
 inline void Graph<T>::Delete_Edge(int i, int j)
 {
-	try
-	{
-		if (i < 0 || j < 0 || i >= matrix_.size() || j >= matrix_.size())
-			throw "This vertex doesn't exist!";
-		if (matrix_[i][j] == 0 && matrix_[j][i] == 0)
-			throw "Your edge doesn't exist";
-	}
-	catch (const char* message) {
-		std::cout << message;
-		return;
-	}
+
 	matrix_[i][j] = 0;
 	matrix_[j][i] = 0;
 }
@@ -202,15 +138,7 @@ inline void Graph<T>::Delete_Edge(int i, int j)
 template<typename T>
 inline void Graph<T>::Delete_Vertex(int ind)
 {
-	try
-	{
-		if (ind >= matrix_.size() || ind < 0)
-			throw "Vertex doesn't exist!";
-	}
-	catch (const char* message) {
-		std::cout << message;
-		return;
-	}
+
 	matrix_.erase(matrix_.begin() + ind);
 	for (auto& row : matrix_)
 	{
